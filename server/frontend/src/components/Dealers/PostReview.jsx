@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import "./Dealers.css";
 import "../assets/style.css";
 import Header from '../Header/Header';
-
+console.log("Hello postReview")
 
 const PostReview = () => {
   const [dealer, setDealer] = useState({});
@@ -17,7 +17,7 @@ const PostReview = () => {
   let root_url = curr_url.substring(0,curr_url.indexOf("postreview"));
   let params = useParams();
   let id =params.id;
-  let dealer_url = root_url+`djangoapp/dealer/${id}`;
+  let dealer_url = root_url+`djangoapp/get_dealer_details/${id}`;
   let review_url = root_url+`djangoapp/add_review`;
   let carmodels_url = root_url+`djangoapp/get_cars`;
 
@@ -67,6 +67,7 @@ const PostReview = () => {
       method: "GET"
     });
     const retobj = await res.json();
+    console.log("get_dealer response:", retobj)
     
     if(retobj.status === 200) {
       let dealerobjs = Array.from(retobj.dealer)
@@ -80,6 +81,7 @@ const PostReview = () => {
       method: "GET"
     });
     const retobj = await res.json();
+    console.log("get_cars response:", retobj);
     
     let carmodelsarr = Array.from(retobj.CarModels)
     setCarmodels(carmodelsarr)
